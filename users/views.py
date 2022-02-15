@@ -37,7 +37,7 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    messages.error(request, 'User was logged out')
+    messages.info(request, 'User was logged out')
     return redirect('login')
 
 
@@ -58,7 +58,7 @@ def registerUser(request):
             return redirect('profiles')
 
         else:
-            messages.success(request, 'An error occurred during registration')
+            messages.error(request, 'An error occurred during registration')
 
     context = {'page': page, 'form': form}
     return render(request, 'users/login_register.html', context)

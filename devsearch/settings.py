@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-&j7#su(_q43=(%l5fbj$8c0s$v_w0rjscd(&@a0!=42v7)n7-e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'devsearch-prod.herokuapp.com/']
 
 
 # Application definition
@@ -92,6 +92,9 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -210,3 +213,7 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_ACCESS_KEY_ID=config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME=config('AWS_STORAGE_BUCKET_NAME')
+
+# checks whether the app is live
+if os.getcwd() == '/app':
+    DEBUG = False
